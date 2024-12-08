@@ -73,6 +73,36 @@
           <button class="btn btn-primary" type="submit">Submit form</button>
         </div>
       </form>
+      <div>'$(document).ready(function () {
+        // Obsługa kliknięcia przycisku Submit
+        $('form').on('submit', function (event) {
+            event.preventDefault(); // Zatrzymanie domyślnego zachowania formularza
+            
+            // Sprawdzenie poprawności formularza
+            if (!this.checkValidity()) {
+                event.stopPropagation();
+                $(this).addClass('was-validated');
+                return;
+            }
+    
+            // Pobranie wartości z pól formularza
+            const imie = $('#imie').val();
+            const nazwisko = $('#nazwisko').val();
+            const wiek = $('#wiek').val();
+    
+            // Dodanie nowego wiersza do tabeli
+            const newRow = `<tr>
+                <td>${imie}</td>
+                <td>${nazwisko}</td>
+                <td>${wiek}</td>
+            </tr>`;
+            $('#dataTable tbody').append(newRow);
+    
+            // Opcjonalne: wyczyść pola formularza po dodaniu
+            $(this)[0].reset();
+            $(this).removeClass('was-validated');
+        });
+    });'</div>
       <table id="dataTable">
         <thead>
             <tr>
